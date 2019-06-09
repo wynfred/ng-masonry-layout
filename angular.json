@@ -115,7 +115,7 @@
         }
       }
     },
-    "ngx-masonry-layout": {
+    "ng-masonry-layout": {
       "projectType": "library",
       "root": "projects/ngx-masonry-layout",
       "sourceRoot": "projects/ngx-masonry-layout/src",

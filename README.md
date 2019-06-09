@@ -7,7 +7,7 @@ This updated version is also compatible with Angular Universal server side rende
 
 ## Installation
 
-`npm install ngx-masonry --save`
+`npm install ng-masonry-layout --save`
 
 If you're using SystemJS add `ngx-masonry` and `masonry-layout` to your configuration:
 
