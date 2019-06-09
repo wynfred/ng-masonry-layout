@@ -2,6 +2,7 @@
  * Public API Surface of ngx-masonry-layout
  */
 
-export * from './lib/ngx-masonry-layout.service';
-export * from './lib/ngx-masonry-layout.component';
-export * from './lib/ngx-masonry-layout.module';
+export * from './lib/ngx-masonry.component';
+export * from './lib/ngx-masonry.directive';
+export * from './lib/ngx-masonry-options';
+export * from './lib/ngx-masonry.module';

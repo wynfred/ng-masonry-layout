@@ -1,8 +1,23 @@
 {
   "name": "ngx-masonry-layout",
-  "version": "0.0.1",
+  "version": "8.0.0",
+  "description":
+    "Angular Module for displaying a feed of items in a masonry layout using https://github.com/desandro/masonry",
+  "keywords": ["angular", "angular 2", "masonry", "masonry layout", "masonry feed", "desandro", "masonry", "ng", "ngx"],
+  "homepage": "https://github.com/wynfred/ngx-masonry-layout/",
+  "bugs": {
+    "url": "https://github.com/wynfred/ngx-masonry-layout/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wynfred/ngx-masonry-layout/"
+  },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/common": ">5.0.0",
+    "@angular/core": ">5.0.0"
+  },
+  "dependencies": {
+    "masonry-layout": "^4.2.0"
   }
 }

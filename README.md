@@ -1,27 +1,185 @@
-# Masonry
+# Angular Module for displaying a feed of items in a masonry layout using [https://github.com/desandro/masonry](https://github.com/desandro/masonry)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+This package was originally a fork from [https://github.com/jelgblad/angular2-masonry](https://github.com/jelgblad/angular2-masonry) to allow it to work with newer versions of Angular.
 
-## Development server
+This updated version is also compatible with Angular Universal server side rendering (SSR)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`npm install ngx-masonry --save`
 
-## Build
+If you're using SystemJS add `ngx-masonry` and `masonry-layout` to your configuration:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```json
+packages: {
+  "ngx-masonry": { "defaultExtension": "js", "main": "index" }
+},
+map: {
+  "ngx-masonry": "node_modules/ngx-masonry",
+  "masonry-layout": "node_modules/masonry-layout/dist/masonry.pkgd.js"
+}
+```
 
-## Running unit tests
+## Usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Import `NgxMasonryModule` into your app's modules:
 
-## Running end-to-end tests
+```typescript
+import { NgxMasonryModule } from 'ngx-masonry';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@NgModule({
+  imports: [
+    NgxMasonryModule
+  ]
+})
+```
 
-## Further help
+```typescript
+@Component({
+  selector: 'my-component',
+  template: `
+     <ngx-masonry>
+       <div ngxMasonryItem class="masonry-item" *ngFor="let item of masonryItems">
+        {{item.title}}
+      </div>
+     </ngx-masonry>
+     `,
+  styles: [
+    `
+       .masonry-item { width: 200px; }
+     `
+  ]
+})
+class MyComponent {
+  masonryItems = [
+    { title: 'item 1' },
+    { title: 'item 2' },
+    { title: 'item 3' },
+    { title: 'item 4' },
+    { title: 'item 5' },
+    { title: 'item 6' }
+  ];
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Configuration
+
+### Options
+
+Read about Masonry options here: [Masonry Options](http://masonry.desandro.com/options.html)
+
+The `options`-attribute takes an object with the following properties:
+
+* itemSelector: string;
+* columnWidth: number | string;
+* gutter: number;
+* percentPosition: boolean;
+* stamp: string;
+* fitWidth: boolean;
+* originLeft: boolean;
+* originTop: boolean;
+* containerStyle: string;
+* transitionDuration: string;
+* resize: boolean;
+* initLayout: boolean;
+* horizontalOrder: boolean;
+
+#### Examples
+
+Inline object:
+
+```html
+<ngx-masonry [options]="{ transitionDuration: '0.8s' }"></ngx-masonry>
+```
+
+From parent component:
+
+```javascript
+import { NgxMasonryOptions } from 'ngx-masonry';
+
+public myOptions: MasonryOptions = {
+  transitionDuration: '0.8s'
+};
+```
+
+```html
+<ngx-masonry [options]="myOptions"></ngx-masonry>
+```
+
+### imagesLoaded
+
+> **NOTE:** Will throw error if global `imagesLoaded` not available.
+
+Delay adding brick until all images in brick are loaded.
+To activate imagesLoaded set `useImagesLoaded` to `true`.
+
+```html
+<ngx-masonry [useImagesLoaded]="true"></ngx-masonry>
+```
+
+index.html:
+
+```html
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+```
+
+check the [ImagesLoaded](https://imagesloaded.desandro.com/) website for the latest version.
+
+### updateLayout
+
+ngx-masonry has an input property, `updateLayout`, which accepts a boolean and will call masonry's `layout()` method on a change. It ignores the first change when the component loads.
+
+```html
+<ngx-masonry [updateLayout]="updateMasonryLayout"></ngx-masonry>
+```
+
+When `updateMasonryLayout` is updated, the `layout()` method will be called.
+
+## Events
+
+### layoutComplete: `EventEmitter<any[]>`
+
+Triggered after a layout and all positioning transitions have completed.
+
+> [http://masonry.desandro.com/events.html#layoutcomplete](http://masonry.desandro.com/events.html#layoutcomplete)
+
+### removeComplete: `EventEmitter<any[]>`
+
+Triggered after an item element has been removed.
+
+> [http://masonry.desandro.com/events.html#removecomplete](http://masonry.desandro.com/events.html#removecomplete)
+
+### FAQ
+* Why is it rendering the tiles twice in prod?
+This could be the case because of angulars build optimizer. A currently working "workaround" is disabling the build-optimizer in the angular.json file.
+```json
+{
+  "projects": {
+    "my-project": {
+      "architect": {
+        "build": {
+            "production": {
+              "buildOptimizer": false
+            }
+          }
+        }
+    }
+  }
+}
+
+For more information refer to this issue:
+https://github.com/gethinoakes/ngx-masonry/issues/8
+```
+
+### Examples
+
+```html
+<ngx-masonry (layoutComplete)="doStuff($event)" (removeComplete)="doOtherStuff($event)"></ngx-masonry>
+```
+
+## Demo
+
+This repository contains a working app using ngx-masonry as a child module, not as an npm package. You can go to the [demo respository](https://github.com/gethinoakes/ngx-masonry-demo) to view an app that uses it as an npm package.
+
+[View a live demo here](https://ngx-masonry-demo.herokuapp.com/)
