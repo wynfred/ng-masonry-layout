@@ -3,5 +3,6 @@
   "dest": "../../dist/ngx-masonry-layout",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["masonry-layout"]
 }
