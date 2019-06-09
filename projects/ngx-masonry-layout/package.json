@@ -1,6 +1,6 @@
 {
   "name": "ng-masonry-layout",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description":
     "Angular Module for displaying a feed of items in a masonry layout using https://github.com/desandro/masonry",
   "keywords": ["angular", "angular 2", "masonry", "masonry layout", "masonry feed", "desandro", "masonry", "ng", "ngx"],

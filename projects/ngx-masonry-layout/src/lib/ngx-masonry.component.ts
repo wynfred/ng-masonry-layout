@@ -45,9 +45,9 @@ export class NgxMasonryComponent implements OnInit, OnChanges, OnDestroy {
   @Output() removeComplete: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   ngOnInit() {
-    if (this.useImagesLoaded && imagesLoaded === undefined) {
-      imagesLoaded = require('imagesloaded');
-    }
+    // if (this.useImagesLoaded && imagesLoaded === undefined) {
+    //   imagesLoaded = require('imagesloaded');
+    // }
 
     if (isPlatformBrowser(this.platformId) && masonryConstructor === undefined) {
       masonryConstructor = require('masonry-layout');
@@ -114,19 +114,19 @@ export class NgxMasonryComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.useImagesLoaded) {
-      imagesLoaded(element, (instance: any) => {
-        this._element.nativeElement.appendChild(element);
+      // imagesLoaded(element, (instance: any) => {
+      //   this._element.nativeElement.appendChild(element);
 
-        // Tell Masonry that a child element has been added
-        this._msnry.appended(element);
+      //   // Tell Masonry that a child element has been added
+      //   this._msnry.appended(element);
 
-        // layout if first item
-        if (isFirstItem) {
-          this.layout();
-        }
-      });
+      //   // layout if first item
+      //   if (isFirstItem) {
+      //     this.layout();
+      //   }
+      // });
 
-      this._element.nativeElement.removeChild(element);
+      // this._element.nativeElement.removeChild(element);
     } else {
       // Tell Masonry that a child element has been added
       this._msnry.appended(element);
